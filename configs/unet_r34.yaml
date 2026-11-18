@@ -1,0 +1,23 @@
+# Baseline: U-Net with an ImageNet-pretrained ResNet-34 encoder.
+# Any key omitted here falls back to the defaults in src/cityseg/config.py.
+output_dir: outputs/unet_r34
+
+data:
+  root: data/cityscapes
+  crop_size: [512, 1024]
+  scale_range: [0.5, 2.0]
+  batch_size: 8
+  val_batch_size: 4
+  num_workers: 4
+
+model:
+  arch: unet
+  encoder: resnet34
+  lr: 3.0e-4
+  weight_decay: 1.0e-4
+  dice_weight: 0.5
+
+trainer:
+  max_epochs: 60
+  precision: 16-mixed
+  check_val_every_n_epoch: 2
